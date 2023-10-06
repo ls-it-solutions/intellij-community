@@ -1766,6 +1766,11 @@ public abstract class KotlinEvaluateExpressionInMppTestGenerated extends Abstrac
                 runTest("testData/evaluation/multipleBreakpoints/initializer.kt");
             }
 
+            @TestMetadata("inlineFunctionWithDefaultArguments.kt")
+            public void testInlineFunctionWithDefaultArguments() throws Exception {
+                runTest("testData/evaluation/multipleBreakpoints/inlineFunctionWithDefaultArguments.kt");
+            }
+
             @TestMetadata("inlineFunctionsInClass.kt")
             public void testInlineFunctionsInClass() throws Exception {
                 runTest("testData/evaluation/multipleBreakpoints/inlineFunctionsInClass.kt");

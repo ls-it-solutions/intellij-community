@@ -240,7 +240,7 @@ class VariableFinder(val context: ExecutionContext) {
                 variables.namedEntitySequence()
                     .filter {
                         val name = it.name
-                        val variableScopeNumber = name.getScopeNumber() ?: return@filter false
+                        val variableScopeNumber = name.getInlineScopeInfo()?.scopeNumber ?: return@filter false
                         (variableScopeNumber == scopeNumber || variableScopeNumber == frameProxy.surroundingScopeNumber) &&
                                 name.dropInlineScopeInfo().matches(INLINED_THIS_REGEX) &&
                                 kind.typeMatches(it.type)
@@ -335,7 +335,7 @@ class VariableFinder(val context: ExecutionContext) {
         namePredicate: (String) -> Boolean
     ): Result? {
         return findLocalVariable(variables, kind, 0) { name ->
-            val scope = name.getScopeNumber()
+            val scope = name.getInlineScopeInfo()?.scopeNumber
             when (scope) {
                 // If the scope number is null, then the variable belongs to the top frame.
                 // Top frame variables are always captured by inline lambdas.
