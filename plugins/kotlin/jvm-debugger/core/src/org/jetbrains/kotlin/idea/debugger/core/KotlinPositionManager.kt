@@ -586,17 +586,6 @@ class KotlinPositionManager(private val debugProcess: DebugProcess) : MultiReque
             throw NoDataException.INSTANCE
         }
         try {
-            if (DexDebugFacility.isDex(debugProcess) &&
-                (debugProcess.virtualMachineProxy as? VirtualMachineProxyImpl)?.canGetSourceDebugExtension() != true) {
-                // If we cannot get source debug extension information, we approximate information for inline functions.
-                // This allows us to stop on some breakpoints in inline functions, but does not work very well.
-                // Source debug extensions are not available on Android devices before Android O.
-                val inlineLocations = runReadAction { DebuggerUtils.getLocationsOfInlinedLine(type, position, debugProcess.searchScope) }
-                if (inlineLocations.isNotEmpty()) {
-                    return inlineLocations
-                }
-            }
-
             val line = position.line + 1
 
             val locations = DebuggerUtilsAsync.locationsOfLineSync(type, KOTLIN_STRATA_NAME, null, line)
