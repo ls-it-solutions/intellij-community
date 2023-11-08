@@ -2,6 +2,7 @@
 package org.jetbrains.uast.test.common.kotlin
 
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.io.FileUtil
 import com.intellij.platform.uast.testFramework.env.findElementByText
 import com.intellij.platform.uast.testFramework.env.findElementByTextFromPsi
 import com.intellij.platform.uast.testFramework.env.findUElementByTextFromPsi
@@ -20,6 +21,7 @@ import org.jetbrains.kotlin.idea.base.test.JUnit4Assertions.assertSameElements
 import org.jetbrains.kotlin.idea.test.KotlinLightCodeInsightFixtureTestCaseBase
 import org.jetbrains.kotlin.idea.test.KotlinLightCodeInsightFixtureTestCaseBase.assertContainsElements
 import org.jetbrains.kotlin.idea.test.KotlinLightCodeInsightFixtureTestCaseBase.assertDoesntContain
+import org.jetbrains.kotlin.idea.test.MockLibraryFacility
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.utils.addToStdlib.cast
@@ -27,6 +29,9 @@ import org.jetbrains.uast.*
 import org.jetbrains.uast.kotlin.KotlinUFile
 import org.jetbrains.uast.kotlin.KotlinUFunctionCallExpression
 import org.jetbrains.uast.visitor.AbstractUastVisitor
+import kotlin.io.path.Path
+import kotlin.io.path.extension
+import kotlin.io.path.nameWithoutExtension
 
 interface UastResolveApiFixtureTestBase : UastPluginSelection {
     fun checkResolveStringFromUast(myFixture: JavaCodeInsightTestFixture, project: Project) {
@@ -1747,5 +1752,72 @@ interface UastResolveApiFixtureTestBase : UastPluginSelection {
                 }
             }
         )
+    }
+
+    fun checkResolveTopLevelInlineFromLibrary(myFixture: JavaCodeInsightTestFixture, withJvmName: Boolean) {
+        val anno = if (withJvmName) "@file:JvmName(\"Mocking\")" else ""
+        val mockLibraryFacility = myFixture.configureLibraryByText(
+            "Mocking.kt", """
+                $anno
+                package test
+
+                inline fun <reified T : Any> mock(): T = TODO()
+
+                object Mock {
+                  inline fun <reified T : Any> mock(): T = TODO()
+                }
+            """.trimIndent()
+        )
+        myFixture.configureByText(
+            "main.kt", """
+                import test.Mock
+                import test.mock as tMock
+
+                class MyClass
+
+                fun test(): Boolean {
+                  val instance1 = Mock.mock<MyClass>()
+                  val instance2 = tMock<MyClass>()
+                  return instance1 == instance2
+                }
+            """.trimIndent()
+        )
+
+        val uFile = myFixture.file.toUElementOfType<UFile>()!!
+        uFile.accept(object : AbstractUastVisitor() {
+            var first: Boolean = true
+
+            override fun visitCallExpression(node: UCallExpression): Boolean {
+                val resolved = node.resolve()
+                TestCase.assertNotNull(resolved)
+                TestCase.assertEquals("mock", resolved!!.name)
+                if (first) {
+                    TestCase.assertEquals("Mock", resolved.containingClass?.name)
+                    first = false
+                } else {
+                    TestCase.assertEquals(
+                        if (withJvmName) "Mocking" else "MockingKt",
+                        resolved.containingClass?.name
+                    )
+                }
+
+                return super.visitCallExpression(node)
+            }
+        })
+
+        mockLibraryFacility.tearDown(myFixture.module)
+    }
+
+    private fun JavaCodeInsightTestFixture.configureLibraryByText(
+        fileName: String,
+        text: String,
+    ): MockLibraryFacility {
+        val path = Path(fileName)
+        val file = FileUtil.createTempFile(path.nameWithoutExtension, "." + path.extension)
+        file.writeText(text)
+        file.deleteOnExit()
+        val mockLibraryFacility = MockLibraryFacility(file, attachSources = false)
+        mockLibraryFacility.setUp(module)
+        return mockLibraryFacility
     }
 }
