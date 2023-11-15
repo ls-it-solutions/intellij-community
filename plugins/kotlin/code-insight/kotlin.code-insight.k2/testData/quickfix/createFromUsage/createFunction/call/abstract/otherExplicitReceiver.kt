@@ -15,5 +15,3 @@ abstract class A {
 class B {
 
 }
-
-// IGNORE_K1

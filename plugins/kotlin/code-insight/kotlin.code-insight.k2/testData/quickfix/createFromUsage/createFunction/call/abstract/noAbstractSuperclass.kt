@@ -9,5 +9,3 @@ class Foo : A() {
         <caret>bar()
     }
 }
-
-// IGNORE_K1

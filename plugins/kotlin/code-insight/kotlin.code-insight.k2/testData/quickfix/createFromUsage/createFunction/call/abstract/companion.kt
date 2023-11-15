@@ -8,5 +8,3 @@ abstract class A
 fun test() {
     val a: Int = A.<caret>foo(2)
 }
-
-// IGNORE_K1

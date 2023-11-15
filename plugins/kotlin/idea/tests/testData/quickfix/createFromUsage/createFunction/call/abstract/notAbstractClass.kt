@@ -10,5 +10,3 @@ class A {
         bar(<caret>foo(1, "2"))
     }
 }
-
-// IGNORE_K2

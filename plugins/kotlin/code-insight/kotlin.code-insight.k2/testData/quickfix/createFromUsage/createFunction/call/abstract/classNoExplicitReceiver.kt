@@ -6,4 +6,4 @@ abstract class A {
         bar(<caret>foo(1, "2"))
     }
 }
-// FUS_QUICKFIX_NAME: org.jetbrains.kotlin.idea.quickfix.createFromUsage.createCallable.CreateCallableFromUsageFix
+// FUS_K2_QUICKFIX_NAME: org.jetbrains.kotlin.idea.quickfix.fixes.createFromUsage.CreateCallableFromUsageFix

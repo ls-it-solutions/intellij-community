@@ -7,5 +7,3 @@ class Foo : Runnable {
         <caret>bar()
     }
 }
-
-// IGNORE_K2
