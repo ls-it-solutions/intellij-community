@@ -9,6 +9,10 @@ import com.intellij.codeInsight.template.Result
 import com.intellij.codeInsight.template.TextResult
 import com.intellij.psi.PsiDocumentManager
 
+/**
+ * An [Expression] class used by the template in [CreateKotlinCallablePsiEditor]. This class simply returns
+ * [candidates] for the item look-up.
+ */
 internal open class ExpressionForCreateCallable(private val candidates: List<String>): Expression() {
     override fun calculateResult(context: ExpressionContext?): Result? {
         return if (candidates.isNotEmpty()) TextResult(candidates.first()) else null
@@ -27,6 +31,10 @@ internal open class ExpressionForCreateCallable(private val candidates: List<Str
     }
 }
 
+/**
+ * This class is the same as [ExpressionForCreateCallable], but it provides an alternative parameter name `p$parameterIndex`
+ * when it has no candidates for the parameter name.
+ */
 internal class ParameterNameExpression(private val parameterIndex: Int, candidates: List<String>): ExpressionForCreateCallable(candidates) {
     override fun calculateResult(context: ExpressionContext?): Result {
         return super.calculateResult(context) ?: TextResult("p$parameterIndex")
