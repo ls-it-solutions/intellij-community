@@ -1700,82 +1700,70 @@ public abstract class K2QuickFixTestGenerated extends AbstractK2QuickFixTest {
     }
 
     @RunWith(JUnit3RunnerWithInners.class)
-    @TestMetadata("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage")
-    public abstract static class CreateFromUsage extends AbstractK2QuickFixTest {
-        @RunWith(JUnit3RunnerWithInners.class)
-        @TestMetadata("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction")
-        public abstract static class CreateFunction extends AbstractK2QuickFixTest {
-            @RunWith(JUnit3RunnerWithInners.class)
-            @TestMetadata("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call")
-            public abstract static class Call extends AbstractK2QuickFixTest {
-                @RunWith(JUnit3RunnerWithInners.class)
-                @TestMetadata("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract")
-                public static class Abstract extends AbstractK2QuickFixTest {
-                    private void runTest(String testDataFilePath) throws Exception {
-                        KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
-                    }
+    @TestMetadata("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract")
+    public static class Abstract extends AbstractK2QuickFixTest {
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
+        }
 
-                    @TestMetadata("classNoExplicitReceiver.kt")
-                    public void testClassNoExplicitReceiver() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/classNoExplicitReceiver.kt");
-                    }
+        @TestMetadata("classNoExplicitReceiver.kt")
+        public void testClassNoExplicitReceiver() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/classNoExplicitReceiver.kt");
+        }
 
-                    @TestMetadata("companion.kt")
-                    public void testCompanion() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/companion.kt");
-                    }
+        @TestMetadata("companion.kt")
+        public void testCompanion() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/companion.kt");
+        }
 
-                    @TestMetadata("explicitReceiverOfContainingClass.kt")
-                    public void testExplicitReceiverOfContainingClass() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/explicitReceiverOfContainingClass.kt");
-                    }
+        @TestMetadata("explicitReceiverOfContainingClass.kt")
+        public void testExplicitReceiverOfContainingClass() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/explicitReceiverOfContainingClass.kt");
+        }
 
-                    @TestMetadata("inAbstractSuperclass.kt")
-                    public void testInAbstractSuperclass() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/inAbstractSuperclass.kt");
-                    }
+        @TestMetadata("inAbstractSuperclass.kt")
+        public void testInAbstractSuperclass() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/inAbstractSuperclass.kt");
+        }
 
-                    @TestMetadata("inBaseInterface.kt")
-                    public void testInBaseInterface() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/inBaseInterface.kt");
-                    }
+        @TestMetadata("inBaseInterface.kt")
+        public void testInBaseInterface() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/inBaseInterface.kt");
+        }
 
-                    @TestMetadata("inBaseInterfaceWithReceiver.kt")
-                    public void testInBaseInterfaceWithReceiver() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/inBaseInterfaceWithReceiver.kt");
-                    }
+        @TestMetadata("inBaseInterfaceWithReceiver.kt")
+        public void testInBaseInterfaceWithReceiver() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/inBaseInterfaceWithReceiver.kt");
+        }
 
-                    @TestMetadata("inBaseInterfaceWithReceiver2.kt")
-                    public void testInBaseInterfaceWithReceiver2() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/inBaseInterfaceWithReceiver2.kt");
-                    }
+        @TestMetadata("inBaseInterfaceWithReceiver2.kt")
+        public void testInBaseInterfaceWithReceiver2() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/inBaseInterfaceWithReceiver2.kt");
+        }
 
-                    @TestMetadata("interfaceNoExplicitReceiver.kt")
-                    public void testInterfaceNoExplicitReceiver() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/interfaceNoExplicitReceiver.kt");
-                    }
+        @TestMetadata("interfaceNoExplicitReceiver.kt")
+        public void testInterfaceNoExplicitReceiver() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/interfaceNoExplicitReceiver.kt");
+        }
 
-                    @TestMetadata("noAbstractSuperclass.kt")
-                    public void testNoAbstractSuperclass() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/noAbstractSuperclass.kt");
-                    }
+        @TestMetadata("noAbstractSuperclass.kt")
+        public void testNoAbstractSuperclass() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/noAbstractSuperclass.kt");
+        }
 
-                    @TestMetadata("notAbstractClass.kt")
-                    public void testNotAbstractClass() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/notAbstractClass.kt");
-                    }
+        @TestMetadata("notAbstractClass.kt")
+        public void testNotAbstractClass() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/notAbstractClass.kt");
+        }
 
-                    @TestMetadata("notWritableAbstractSuperclass.kt")
-                    public void testNotWritableAbstractSuperclass() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/notWritableAbstractSuperclass.kt");
-                    }
+        @TestMetadata("notWritableAbstractSuperclass.kt")
+        public void testNotWritableAbstractSuperclass() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/notWritableAbstractSuperclass.kt");
+        }
 
-                    @TestMetadata("otherExplicitReceiver.kt")
-                    public void testOtherExplicitReceiver() throws Exception {
-                        runTest("../../kotlin.code-insight.k2/testData/quickfix/createFromUsage/createFunction/call/abstract/otherExplicitReceiver.kt");
-                    }
-                }
-            }
+        @TestMetadata("otherExplicitReceiver.kt")
+        public void testOtherExplicitReceiver() throws Exception {
+            runTest("../../../idea/tests/testData/quickfix/createFromUsage/createFunction/call/abstract/otherExplicitReceiver.kt");
         }
     }
 }
