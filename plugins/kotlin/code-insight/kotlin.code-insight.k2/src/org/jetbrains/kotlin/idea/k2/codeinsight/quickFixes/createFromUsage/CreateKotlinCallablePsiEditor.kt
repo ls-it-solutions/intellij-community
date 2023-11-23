@@ -68,7 +68,6 @@ internal class CreateKotlinCallablePsiEditor(
     private fun runTemplate(editor: Editor, document: Document, function: KtNamedFunction) {
         val file = function.containingKtFile
         val functionMarker = document.createRangeMarker(function.textRange)
-        getDocumentManager().doPostponedOperationsAndUnblockDocument(document)
         moveCaretToCallable(editor, function)
         val templateImpl = setupTemplate(function)
         TemplateManager.getInstance(project)
