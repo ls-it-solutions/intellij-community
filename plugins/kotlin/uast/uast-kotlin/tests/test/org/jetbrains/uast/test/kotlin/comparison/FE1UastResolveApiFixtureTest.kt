@@ -206,4 +206,8 @@ class FE1UastResolveApiFixtureTest : KotlinLightCodeInsightFixtureTestCase(), Ua
     fun testResolveTopLevelInlineFromLibraryWithJvmName() {
         checkResolveTopLevelInlineFromLibrary(myFixture, withJvmName = true)
     }
+
+    fun testResolveInnerInlineFromLibrary() {
+        checkResolveInnerInlineFromLibrary(myFixture)
+    }
 }
